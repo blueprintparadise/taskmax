@@ -1,7 +1,6 @@
 addict==2.4.0
 certifi==2022.9.24
 charset-normalizer==2.1.1
-clip==1.0
 contourpy==1.0.5
 cycler==0.11.0
 efficientnet-pytorch==0.7.1
@@ -31,11 +30,9 @@ segmentation-models-pytorch @ git+https://github.com/qubvel/segmentation_models.
 six==1.16.0
 smart-open==6.2.0
 timm==0.4.12
-torch==1.12.1+cu116
-torchaudio==0.12.1+cu116
-torchvision==0.13.1+cu116
 tqdm==4.64.1
 typing_extensions==4.3.0
 urllib3==1.26.12
 wcwidth==0.2.5
 yapf==0.32.0
+clip
