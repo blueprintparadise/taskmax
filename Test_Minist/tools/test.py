@@ -429,7 +429,7 @@ def anot_preproces(anot_cv: np.ndarray) -> np.ndarray:
     convert each mask of shape [H,W,C=3]->[H,W,C=N]
     N: is number of categories
     '''
-    data_dir = 'path_to_dataset/CMP_facade_DB_base/base'
+    data_dir = '/content/base'
     color_dict = Image.open(sorted(glob.glob(data_dir + "/*.png"))[0]).palette.colors
     output_mask = []
     for label in color_dict.keys():
@@ -444,7 +444,7 @@ def anot_preproces(anot_cv: np.ndarray) -> np.ndarray:
     return np.transpose(output_mask, (2, 0, 1))
 
 
-def train(data_dir: Union[str, Path] = 'path_to_dataset/CMP_facade_DB_base/base'):
+def train(data_dir: Union[str, Path] = '/content/base'):
     '''Note: data_dir must contain both images and its corresponding mask
     and the partition that I considered for train test split (50) is according to cmp Facade dataset
     '''
@@ -458,7 +458,7 @@ def train(data_dir: Union[str, Path] = 'path_to_dataset/CMP_facade_DB_base/base'
                                      criterion=None,
                                      load_imagenet_model=False)
     model = torch.nn.DataParallel(model)
-    ckpt_path = 'path_to_model/model/segformer_7data.pth'
+    ckpt_path = '/content/drive/MyDrive/segformer_7data.pth'
     checkpoint = torch.load(ckpt_path, map_location='cpu')['state_dict']
     ckpt_filter = {k: v for k, v in checkpoint.items() if 'criterion.0.criterion.weight' not in k}
     model.load_state_dict(ckpt_filter, strict=False)
@@ -554,9 +554,9 @@ def train(data_dir: Union[str, Path] = 'path_to_dataset/CMP_facade_DB_base/base'
                 if iou_test_value.item() / len(imgs_test_list) > best_iou_score:
                     best_iou_score = iou_test_value.item() / len(imgs_test_list)
                     torch.save(model.state_dict(), 'new_segmentation_model.pth')
-
-        print(f'average epoch_loss is {sum(losses) / len(losses)}')
-        epoch_loss.append(sum(losses) / len(losses))
+        print(losses)
+        #print(f'average epoch_loss is {sum(losses) / len(losses)}')
+        #epoch_loss.append(sum(losses) / len(losses))
         print('f1_score_test', f1_score_test)
         print('iou_score_test', iou_score_test)
     print('all_train_loss', all_loss)
