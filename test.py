@@ -468,7 +468,7 @@ def train(data_dir: Union[str, Path] = '/content/base'):
     # I used two loss function for evaluation
     criterion = JaccardLoss(mode='multilabel', from_logits=False)
     # criterion = DiceLoss(mode='multilabel', from_logits=False)
-    EPOCH = 5
+    EPOCH = 1
     batch_size = 6
     epoch_loss = []
     all_loss = []
